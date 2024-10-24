@@ -113,17 +113,15 @@ class LoginView: UIView {
         signUpLabel = UILabel()
         signUpLabel.translatesAutoresizingMaskIntoConstraints = false
         signUpLabel.textAlignment = .center
+        signUpLabel.font = UIFont.systemFont(ofSize: 14)
 
         let normalText = "Don't have an account? "
         let signUpText = "Sign up"
-        let attributedString = NSMutableAttributedString(
-            string: normalText,
-            attributes: [.font: UIFont.systemFont(ofSize: 14)])
+        let attributedString = NSMutableAttributedString(string: normalText)
         let signUpAttributedString = NSAttributedString(
             string: signUpText,
             attributes: [
-                .foregroundColor: UIColor.systemBlue,
-                .font: UIFont.boldSystemFont(ofSize: 14),
+                .foregroundColor: UIColor.systemBlue
             ])
 
         attributedString.append(signUpAttributedString)

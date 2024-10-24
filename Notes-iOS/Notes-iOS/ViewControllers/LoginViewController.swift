@@ -19,6 +19,14 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
 
+        let tapGesture = UITapGestureRecognizer(
+            target: self, action: #selector(handleSignUpTap))
+        loginView.signUpLabel.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func handleSignUpTap() {
+        let signupViewController = SignupViewController()
+        navigationController?.pushViewController(signupViewController, animated: true)
     }
 
 }
