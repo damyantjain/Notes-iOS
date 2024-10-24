@@ -9,11 +9,24 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let defaults = UserDefaults.standard
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        if let accessToken = defaults.object(forKey: "accessToken") as! String?,
+            !accessToken.isEmpty
+        {
+            navigateToLandingScreen()
+        } else {
+            navigateToLoginScreen()
+        }
     }
 
+    private func navigateToLandingScreen() {
+    }
 
+    private func navigateToLoginScreen() {
+        let loginVC = LoginViewController()
+        navigationController?.setViewControllers([loginVC], animated: true)
+    }
 }
-
