@@ -9,6 +9,7 @@ import UIKit
 
 class LoginView: UIView {
 
+    var wrapperView: UIView!
     var loginLabel: UILabel!
     var emailLabel: UILabel!
     var emailTextField: UITextField!
@@ -18,6 +19,7 @@ class LoginView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
+        setUpWrapperView()
         setUpLoginLabel()
         setUpEmailLabel()
         setUpEmailTextField()
@@ -26,18 +28,24 @@ class LoginView: UIView {
 
         initConstraints()
     }
+    
+    func setUpWrapperView() {
+        wrapperView = UIView()
+        wrapperView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(wrapperView)
+    }
 
     func setUpLoginLabel() {
         loginLabel = UILabel()
         loginLabel.text = "Log in"
-        loginLabel.font = .systemFont(ofSize: 20)
+        loginLabel.font = .boldSystemFont(ofSize: 32)
         loginLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(loginLabel)
     }
 
     func setUpEmailLabel() {
         emailLabel = UILabel()
-        emailLabel.text = "Email"
+        emailLabel.text = "Email address"
         emailLabel.font = .systemFont(ofSize: 16)
         emailLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(emailLabel)
@@ -47,6 +55,10 @@ class LoginView: UIView {
         emailTextField = UITextField()
         emailTextField.placeholder = "example@email.com"
         emailTextField.font = .systemFont(ofSize: 16)
+        emailTextField.layer.cornerRadius = 8
+        emailTextField.layer.borderColor = UIColor.lightGray.cgColor
+        emailTextField.borderStyle = .roundedRect
+        emailTextField.layer.borderWidth = 1
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
 
         addSubview(emailTextField)
@@ -64,17 +76,49 @@ class LoginView: UIView {
         passwordTextField = UITextField()
         passwordTextField.placeholder = "Password"
         passwordTextField.font = .systemFont(ofSize: 16)
-        passwordTextField.isHidden = true
+        passwordTextField.layer.cornerRadius = 8
+        passwordTextField.layer.borderColor = UIColor.lightGray.cgColor
+        passwordTextField.borderStyle = .roundedRect
+        passwordTextField.layer.borderWidth = 1
+        passwordTextField.isSecureTextEntry = true
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         addSubview(passwordTextField)
     }
 
     func initConstraints() {
         NSLayoutConstraint.activate([
+            
+            //wrapper view
+            wrapperView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            wrapperView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 24),
+            wrapperView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -24),
+            wrapperView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 16),
 
+            //login label
             loginLabel.topAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 0),
-            loginLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16)
+                equalTo: wrapperView.topAnchor, constant: 0),
+            loginLabel.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
+            
+            //email label
+            emailLabel.topAnchor.constraint(equalTo: loginLabel.bottomAnchor, constant: 40),
+            emailLabel.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
+            
+            //email field
+            emailTextField.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 6),
+            emailTextField.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
+            emailTextField.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor),
+            emailTextField.heightAnchor.constraint(equalToConstant: 40),
+            
+            //password label
+            passwordLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 16),
+            passwordLabel.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
+            
+            //password field
+            passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 6),
+            passwordTextField.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
+            passwordTextField.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 40),
+            
 
         ])
     }
