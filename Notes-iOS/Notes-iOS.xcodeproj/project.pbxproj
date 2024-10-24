@@ -3,14 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		B19A9C529ABDC0FAA1C068CB /* Pods_Notes_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69B99DD026B51C65EB7C0785 /* Pods_Notes_iOS.framework */; };
 		E15B9D242CCA9EC300787E66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15B9D1A2CCA9EC300787E66 /* AppDelegate.swift */; };
 		E15B9D252CCA9EC300787E66 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15B9D212CCA9EC300787E66 /* SceneDelegate.swift */; };
-		E15B9D262CCA9EC300787E66 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15B9D222CCA9EC300787E66 /* ViewController.swift */; };
 		E15B9D272CCA9EC300787E66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E15B9D1B2CCA9EC300787E66 /* Assets.xcassets */; };
 		E15B9D292CCA9EC300787E66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E15B9D1E2CCA9EC300787E66 /* LaunchScreen.storyboard */; };
 		E15B9D2A2CCA9EC300787E66 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E15B9D202CCA9EC300787E66 /* Main.storyboard */; };
@@ -27,8 +26,14 @@
 		E15B9D1D2CCA9EC300787E66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E15B9D1F2CCA9EC300787E66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E15B9D212CCA9EC300787E66 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E15B9D222CCA9EC300787E66 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		E1700A832CCAAB700043895A /* ViewControllers */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ViewControllers; sourceTree = "<group>"; };
+		E1700A842CCAAB880043895A /* Views */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Views; sourceTree = "<group>"; };
+		E1700A8D2CCAAC8B0043895A /* Services */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Services; sourceTree = "<group>"; };
+		E1700A912CCAACB60043895A /* Utils */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Utils; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		E15B9CFF2CCA9DB200787E66 /* Frameworks */ = {
@@ -80,13 +85,16 @@
 		E15B9D232CCA9EC300787E66 /* Notes-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				E1700A912CCAACB60043895A /* Utils */,
+				E1700A8D2CCAAC8B0043895A /* Services */,
+				E1700A842CCAAB880043895A /* Views */,
+				E1700A832CCAAB700043895A /* ViewControllers */,
 				E15B9D1A2CCA9EC300787E66 /* AppDelegate.swift */,
 				E15B9D1B2CCA9EC300787E66 /* Assets.xcassets */,
 				E15B9D1C2CCA9EC300787E66 /* Info.plist */,
 				E15B9D1E2CCA9EC300787E66 /* LaunchScreen.storyboard */,
 				E15B9D202CCA9EC300787E66 /* Main.storyboard */,
 				E15B9D212CCA9EC300787E66 /* SceneDelegate.swift */,
-				E15B9D222CCA9EC300787E66 /* ViewController.swift */,
 			);
 			path = "Notes-iOS";
 			sourceTree = "<group>";
@@ -107,6 +115,12 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				E1700A832CCAAB700043895A /* ViewControllers */,
+				E1700A842CCAAB880043895A /* Views */,
+				E1700A8D2CCAAC8B0043895A /* Services */,
+				E1700A912CCAACB60043895A /* Utils */,
 			);
 			name = "Notes-iOS";
 			productName = "Notes-iOS";
@@ -208,7 +222,6 @@
 			files = (
 				E15B9D242CCA9EC300787E66 /* AppDelegate.swift in Sources */,
 				E15B9D252CCA9EC300787E66 /* SceneDelegate.swift in Sources */,
-				E15B9D262CCA9EC300787E66 /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
