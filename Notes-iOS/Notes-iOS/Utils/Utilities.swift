@@ -19,7 +19,7 @@ public class Utilities {
     
     static func showErrorAlert(_ title: String,_ message: String, _ viewController: UIViewController) {
         let alert = UIAlertController(
-            title: "Validation Error", message: "\(message)",
+            title: title, message: "\(message)",
             preferredStyle: .alert
         )
 

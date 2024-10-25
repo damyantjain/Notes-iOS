@@ -7,7 +7,7 @@
 
 protocol AuthAPIProtocol {
 
-    func login(credentials: Credentials) async throws -> Auth
-    func register(credentials: Credentials) async throws -> Auth
+    func login(credentials: Credentials) async throws -> APIResponse<Auth>
+    func register(credentials: Credentials) async throws -> APIResponse<Auth>
     
 }

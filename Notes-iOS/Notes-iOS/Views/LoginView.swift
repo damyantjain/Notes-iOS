@@ -99,7 +99,7 @@ class LoginView: UIView {
         addSubview(loginButton)
     }
 
-    //Using Attributed String as per: https://stackoverflow.com/a/32269975/15136189
+    //Using Attributed String as per: stackoverflow.com/a/32269975/15136189
     func setUpSignUpLabel() {
         signUpLabel = UILabel()
         signUpLabel.translatesAutoresizingMaskIntoConstraints = false

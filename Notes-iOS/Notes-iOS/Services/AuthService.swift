@@ -5,13 +5,26 @@
 //  Created by Damyant Jain on 10/24/24.
 //
 
-class AuthService : AuthAPIProtocol {
-    
-    func login(credentials: Credentials) async throws -> Auth {
-        return Auth(token: "123456789", auth: true)
+class AuthService: AuthAPIProtocol {
+
+    func login(credentials: Credentials) async throws -> APIResponse<Auth> {
+        var parameters = [
+            "email": credentials.email,
+            "password": credentials.password,
+        ]
+        let response: APIResponse<Auth> = await APIClient.instance.postAsync(
+            path: APIConstants.login, parameters: parameters)
+        return response
     }
-    
-    func register(credentials: Credentials) async throws -> Auth {
-        return Auth(token: "123456789", auth: true)
+
+    func register(credentials: Credentials) async throws -> APIResponse<Auth> {
+        var parameters = [
+            "name": credentials.name,
+            "email": credentials.email,
+            "password": credentials.password,
+        ]
+        let response: APIResponse<Auth> = await APIClient.instance.postAsync(
+            path: APIConstants.login, parameters: parameters)
+        return response
     }
 }
