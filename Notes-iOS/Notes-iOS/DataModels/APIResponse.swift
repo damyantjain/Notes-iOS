@@ -5,7 +5,8 @@
 //  Created by Damyant Jain on 10/25/24.
 //
 
-public class Response<T> {
+struct APIResponse<T: Codable>: Codable {
+    var success: Bool
     var data: T?
-    var success: Bool = false
+    var message: String?
 }

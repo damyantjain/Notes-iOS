@@ -8,7 +8,8 @@
 import UIKit
 
 class SignupViewController: UIViewController {
-
+    
+    let defaults = UserDefaults.standard
     let signUpView = SignupView()
     let authService = AuthService()
 
@@ -45,7 +46,12 @@ class SignupViewController: UIViewController {
         do {
             let response = try await authService.register(
                 credentials: credentials)
-            if response.auth {
+            if !response.success {
+                Utilities.showErrorAlert(
+                    "Error", "Failed to register. Try Again", self)
+            }
+            if response.data?.auth == true, let token = response.data?.token {
+                defaults.set(token, forKey: "accessToken")
                 registerdSuccessfully()
             } else {
                 Utilities.showErrorAlert(
