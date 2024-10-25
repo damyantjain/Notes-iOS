@@ -8,7 +8,7 @@
 class AuthService : AuthAPIProtocol {
     
     func login(credentials: Credentials) async throws -> Auth {
-        return Auth(token: "123456789", auth: true)
+        return Auth(token: "123456789", auth: false)
     }
     
     func register(credentials: Credentials) async throws -> Auth {

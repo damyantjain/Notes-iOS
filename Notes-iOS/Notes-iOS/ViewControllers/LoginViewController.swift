@@ -54,10 +54,14 @@ class LoginViewController: UIViewController {
                 let valueToBeSaved = response.token
                 defaults.set(valueToBeSaved, forKey: "apiKey")
                 let landingVC = LandingViewController()
-                navigationController?.setViewControllers([landingVC], animated: true)
+                navigationController?.setViewControllers(
+                    [landingVC], animated: true)
+            } else {
+                Utilities.showErrorAlert(
+                    "Oops!", "Login failed", self)
             }
         } catch {
-            
+
         }
     }
 
