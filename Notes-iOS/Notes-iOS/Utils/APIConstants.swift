@@ -9,14 +9,14 @@ class APIConstants {
     static let baseURL = "http://apis.sakibnm.work:3000/api"
     
     //Auth API
-    static let details = baseURL + "/auth/me"
-    static let register = baseURL + "/auth/register"
-    static let login = baseURL + "/auth/login"
-    static let logout = baseURL + "/auth/logout"
+    static let details = "/auth/me"
+    static let register = "/auth/register"
+    static let login = "/auth/login"
+    static let logout = "/auth/logout"
     
     //Note API
-    static let getAllNotes = baseURL + "/note/getall"
-    static let addNote = baseURL + "/note/post"
-    static let deleteNote = baseURL + "/note/delete"
+    static let getAllNotes = "/note/getall"
+    static let addNote = "/note/post"
+    static let deleteNote = "/note/delete"
     
 }
