@@ -6,7 +6,7 @@
 //
 
 struct Credentials : Codable{
-    let email: String
-    let password: String
-    let name: String
+    var email: String
+    var password: String
+    var name: String
 }

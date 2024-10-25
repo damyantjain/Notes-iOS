@@ -69,6 +69,7 @@ class LoginViewController: UIViewController {
                     "Validation error", "Please enter a valid email", self)
                 return (false, credentials)
             }
+            credentials.email = email
         }
         if let password = loginView.passwordTextField.text {
             if password.isEmpty {
@@ -76,6 +77,7 @@ class LoginViewController: UIViewController {
                     "Validation error", "Password cannot be empty", self)
                 return (false, credentials)
             }
+            credentials.password = password
         }
         return (true, credentials)
     }
