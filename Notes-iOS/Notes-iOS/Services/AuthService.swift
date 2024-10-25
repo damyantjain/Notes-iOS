@@ -5,3 +5,6 @@
 //  Created by Damyant Jain on 10/24/24.
 //
 
+class LoginService : AuthAPIProtocol {
+    
+}
