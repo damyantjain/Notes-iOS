@@ -23,6 +23,8 @@ class ViewController: UIViewController {
     }
 
     private func navigateToLandingScreen() {
+        let landingVC = LandingViewController()
+        navigationController?.setViewControllers([landingVC], animated: true)
     }
 
     private func navigateToLoginScreen() {

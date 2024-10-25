@@ -16,7 +16,6 @@ class LoginView: UIView {
     var passwordLabel: UILabel!
     var passwordTextField: UITextField!
     var loginButton: UIButton!
-    var signupButton: UIButton!
     var signUpLabel: UILabel!
 
     override init(frame: CGRect) {
@@ -94,18 +93,10 @@ class LoginView: UIView {
         loginButton = UIButton()
         loginButton.setTitle("Log in", for: .normal)
         loginButton.setTitleColor(.white, for: .normal)
-        loginButton.backgroundColor = .systemBlue
+        loginButton.backgroundColor = .black
         loginButton.layer.cornerRadius = 8
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         addSubview(loginButton)
-    }
-
-    func setUpSignupButton() {
-        signupButton = UIButton()
-        signupButton.setTitle("Don't have and account? Sign up", for: .normal)
-        signupButton.setTitleColor(.black, for: .normal)
-        signupButton.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(signupButton)
     }
 
     //Using Attributed String as per: https://stackoverflow.com/a/32269975/15136189
@@ -113,17 +104,16 @@ class LoginView: UIView {
         signUpLabel = UILabel()
         signUpLabel.translatesAutoresizingMaskIntoConstraints = false
         signUpLabel.textAlignment = .center
+        signUpLabel.font = UIFont.systemFont(ofSize: 14)
 
         let normalText = "Don't have an account? "
         let signUpText = "Sign up"
-        let attributedString = NSMutableAttributedString(
-            string: normalText,
-            attributes: [.font: UIFont.systemFont(ofSize: 14)])
+        let attributedString = NSMutableAttributedString(string: normalText)
         let signUpAttributedString = NSAttributedString(
             string: signUpText,
             attributes: [
-                .foregroundColor: UIColor.systemBlue,
-                .font: UIFont.boldSystemFont(ofSize: 14),
+                .foregroundColor: UIColor.black,
+                .font: UIFont.boldSystemFont(ofSize: 14)
             ])
 
         attributedString.append(signUpAttributedString)
@@ -190,7 +180,7 @@ class LoginView: UIView {
                 equalTo: wrapperView.trailingAnchor),
             loginButton.heightAnchor.constraint(equalToConstant: 40),
 
-            //signup button
+            //signup label
             signUpLabel.topAnchor.constraint(
                 equalTo: loginButton.bottomAnchor, constant: 16),
             signUpLabel.centerXAnchor.constraint(
