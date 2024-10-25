@@ -5,6 +5,13 @@
 //  Created by Damyant Jain on 10/24/24.
 //
 
-class LoginService : AuthAPIProtocol {
+class AuthService : AuthAPIProtocol {
     
+    func login(credentials: Credentials) async throws -> Auth {
+        return Auth(token: "123456789", auth: true)
+    }
+    
+    func register(credentials: Credentials) async throws -> Auth {
+        return Auth(token: "123456789", auth: true)
+    }
 }

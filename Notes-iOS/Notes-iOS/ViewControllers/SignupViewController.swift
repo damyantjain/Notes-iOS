@@ -17,6 +17,22 @@ class SignupViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tapRecognizer = UITapGestureRecognizer(
+            target: self, action: #selector(hideKeyboardOnTap))
+        tapRecognizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapRecognizer)
+        
+        signUpView.signUpButton.addTarget(
+            self, action: #selector(handleSignupButtonTap), for: .touchUpInside)
+    }
+    
+    @objc func hideKeyboardOnTap() {
+        view.endEditing(true)
+    }
+    
+    @objc func handleSignupButtonTap() {
+        
     }
 
 }
