@@ -53,6 +53,7 @@ class LoginViewController: UIViewController {
             if !response.success {
                 Utilities.showErrorAlert(
                     "Oops!", "Login failed", self)
+                return
             }
             if response.data?.auth == true, let valueToBeSaved = response.data?.token{
                 defaults.set(valueToBeSaved, forKey: "accessToken")
@@ -76,7 +77,7 @@ class LoginViewController: UIViewController {
                     "Validation error", "Please enter a valid email", self)
                 return (false, credentials)
             }
-            credentials.email = email
+            credentials.email = email.lowercased()
         }
         if let password = loginView.passwordTextField.text {
             if password.isEmpty {

@@ -8,7 +8,7 @@
 class AuthService: AuthAPIProtocol {
 
     func login(credentials: Credentials) async throws -> APIResponse<Auth> {
-        var parameters = [
+        let parameters = [
             "email": credentials.email,
             "password": credentials.password,
         ]
@@ -18,13 +18,13 @@ class AuthService: AuthAPIProtocol {
     }
 
     func register(credentials: Credentials) async throws -> APIResponse<Auth> {
-        var parameters = [
+        let parameters = [
             "name": credentials.name,
             "email": credentials.email,
             "password": credentials.password,
         ]
         let response: APIResponse<Auth> = await APIClient.instance.postAsync(
-            path: APIConstants.login, parameters: parameters)
+            path: APIConstants.register, parameters: parameters)
         return response
     }
 }

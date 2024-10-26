@@ -9,6 +9,7 @@ import UIKit
 
 class SignupView: UIView {
 
+    var scrollView: UIScrollView!
     var wrapperView: UIView!
     var signUpLabel: UILabel!
     var nameLabel: UILabel!
@@ -24,6 +25,7 @@ class SignupView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
+        setUpScrollView()
         setUpWrapperView()
         setUpSignUpLabel()
         setUpNameLabel()
@@ -39,10 +41,16 @@ class SignupView: UIView {
         initConstraints()
     }
 
+    func setUpScrollView() {
+        scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(scrollView)
+    }
+
     func setUpWrapperView() {
         wrapperView = UIView()
         wrapperView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(wrapperView)
+        scrollView.addSubview(wrapperView)
     }
 
     func setUpSignUpLabel() {
@@ -50,7 +58,7 @@ class SignupView: UIView {
         signUpLabel.text = "Sign up"
         signUpLabel.font = .boldSystemFont(ofSize: 32)
         signUpLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(signUpLabel)
+        wrapperView.addSubview(signUpLabel)
     }
 
     func setUpNameLabel() {
@@ -58,7 +66,7 @@ class SignupView: UIView {
         nameLabel.text = "Name"
         nameLabel.font = .systemFont(ofSize: 16)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(nameLabel)
+        wrapperView.addSubview(nameLabel)
     }
 
     func setUpNameTextField() {
@@ -71,7 +79,7 @@ class SignupView: UIView {
         nameTextField.layer.borderWidth = 1
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
 
-        addSubview(nameTextField)
+        wrapperView.addSubview(nameTextField)
     }
 
     func setUpEmailLabel() {
@@ -79,7 +87,7 @@ class SignupView: UIView {
         emailLabel.text = "Email address"
         emailLabel.font = .systemFont(ofSize: 16)
         emailLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(emailLabel)
+        wrapperView.addSubview(emailLabel)
     }
 
     func setUpEmailTextField() {
@@ -92,7 +100,7 @@ class SignupView: UIView {
         emailTextField.layer.borderWidth = 1
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
 
-        addSubview(emailTextField)
+        wrapperView.addSubview(emailTextField)
     }
 
     func setUpPasswordLabel() {
@@ -100,7 +108,7 @@ class SignupView: UIView {
         passwordLabel.text = "Password"
         passwordLabel.font = .systemFont(ofSize: 16)
         passwordLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(passwordLabel)
+        wrapperView.addSubview(passwordLabel)
     }
 
     func setUpPasswordTextField() {
@@ -113,7 +121,7 @@ class SignupView: UIView {
         passwordTextField.layer.borderWidth = 1
         passwordTextField.isSecureTextEntry = true
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(passwordTextField)
+        wrapperView.addSubview(passwordTextField)
     }
 
     func setUpConfirmPasswordLabel() {
@@ -121,7 +129,7 @@ class SignupView: UIView {
         confirmPasswordLabel.text = "Confirm Password"
         confirmPasswordLabel.font = .systemFont(ofSize: 16)
         confirmPasswordLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(confirmPasswordLabel)
+        wrapperView.addSubview(confirmPasswordLabel)
     }
 
     func setUpConfirmPasswordTextField() {
@@ -133,8 +141,9 @@ class SignupView: UIView {
         confirmPasswordTextField.borderStyle = .roundedRect
         confirmPasswordTextField.layer.borderWidth = 1
         confirmPasswordTextField.isSecureTextEntry = true
-        confirmPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(confirmPasswordTextField)
+        confirmPasswordTextField.translatesAutoresizingMaskIntoConstraints =
+            false
+        wrapperView.addSubview(confirmPasswordTextField)
     }
 
     func setUpSignUpButton() {
@@ -144,67 +153,110 @@ class SignupView: UIView {
         signUpButton.backgroundColor = .black
         signUpButton.layer.cornerRadius = 8
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(signUpButton)
+        wrapperView.addSubview(signUpButton)
     }
 
     func initConstraints() {
         NSLayoutConstraint.activate([
 
+            //scroll view
+            scrollView.topAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.topAnchor),
+            scrollView.trailingAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            scrollView.bottomAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.leadingAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            
             //wrapper view
-            wrapperView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            wrapperView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 24),
-            wrapperView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -24),
-            wrapperView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 16),
+            wrapperView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            wrapperView.leadingAnchor.constraint(
+                equalTo: scrollView.leadingAnchor, constant: 24),
+            wrapperView.trailingAnchor.constraint(
+                equalTo: scrollView.trailingAnchor, constant: -24),
+            wrapperView.bottomAnchor.constraint(
+                equalTo: scrollView.bottomAnchor),
+            wrapperView.widthAnchor.constraint(
+                equalTo: scrollView.widthAnchor, constant: -48),
 
             //sign up label
-            signUpLabel.topAnchor.constraint(equalTo: wrapperView.topAnchor, constant: 0),
-            signUpLabel.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
+            signUpLabel.topAnchor.constraint(
+                equalTo: wrapperView.topAnchor, constant: 0),
+            signUpLabel.leadingAnchor.constraint(
+                equalTo: wrapperView.leadingAnchor),
 
             //name label
-            nameLabel.topAnchor.constraint(equalTo: signUpLabel.bottomAnchor, constant: 40),
-            nameLabel.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
+            nameLabel.topAnchor.constraint(
+                equalTo: signUpLabel.bottomAnchor, constant: 40),
+            nameLabel.leadingAnchor.constraint(
+                equalTo: wrapperView.leadingAnchor),
 
             //name field
-            nameTextField.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 6),
-            nameTextField.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
-            nameTextField.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor),
+            nameTextField.topAnchor.constraint(
+                equalTo: nameLabel.bottomAnchor, constant: 6),
+            nameTextField.leadingAnchor.constraint(
+                equalTo: wrapperView.leadingAnchor),
+            nameTextField.trailingAnchor.constraint(
+                equalTo: wrapperView.trailingAnchor),
             nameTextField.heightAnchor.constraint(equalToConstant: 40),
 
             //email label
-            emailLabel.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 16),
-            emailLabel.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
+            emailLabel.topAnchor.constraint(
+                equalTo: nameTextField.bottomAnchor, constant: 16),
+            emailLabel.leadingAnchor.constraint(
+                equalTo: wrapperView.leadingAnchor),
 
             //email field
-            emailTextField.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 6),
-            emailTextField.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
-            emailTextField.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor),
+            emailTextField.topAnchor.constraint(
+                equalTo: emailLabel.bottomAnchor, constant: 6),
+            emailTextField.leadingAnchor.constraint(
+                equalTo: wrapperView.leadingAnchor),
+            emailTextField.trailingAnchor.constraint(
+                equalTo: wrapperView.trailingAnchor),
             emailTextField.heightAnchor.constraint(equalToConstant: 40),
 
             //password label
-            passwordLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 16),
-            passwordLabel.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
+            passwordLabel.topAnchor.constraint(
+                equalTo: emailTextField.bottomAnchor, constant: 16),
+            passwordLabel.leadingAnchor.constraint(
+                equalTo: wrapperView.leadingAnchor),
 
             //password field
-            passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 6),
-            passwordTextField.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
-            passwordTextField.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor),
+            passwordTextField.topAnchor.constraint(
+                equalTo: passwordLabel.bottomAnchor, constant: 6),
+            passwordTextField.leadingAnchor.constraint(
+                equalTo: wrapperView.leadingAnchor),
+            passwordTextField.trailingAnchor.constraint(
+                equalTo: wrapperView.trailingAnchor),
             passwordTextField.heightAnchor.constraint(equalToConstant: 40),
 
             //confirm password label
-            confirmPasswordLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16),
-            confirmPasswordLabel.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
+            confirmPasswordLabel.topAnchor.constraint(
+                equalTo: passwordTextField.bottomAnchor, constant: 16),
+            confirmPasswordLabel.leadingAnchor.constraint(
+                equalTo: wrapperView.leadingAnchor),
 
             //confirm password field
-            confirmPasswordTextField.topAnchor.constraint(equalTo: confirmPasswordLabel.bottomAnchor, constant: 6),
-            confirmPasswordTextField.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
-            confirmPasswordTextField.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor),
-            confirmPasswordTextField.heightAnchor.constraint(equalToConstant: 40),
+            confirmPasswordTextField.topAnchor.constraint(
+                equalTo: confirmPasswordLabel.bottomAnchor, constant: 6),
+            confirmPasswordTextField.leadingAnchor.constraint(
+                equalTo: wrapperView.leadingAnchor),
+            confirmPasswordTextField.trailingAnchor.constraint(
+                equalTo: wrapperView.trailingAnchor),
+            confirmPasswordTextField.heightAnchor.constraint(
+                equalToConstant: 40),
 
             //sign up button
-            signUpButton.topAnchor.constraint(equalTo: confirmPasswordTextField.bottomAnchor, constant: 24),
-            signUpButton.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor),
-            signUpButton.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor),
-            signUpButton.heightAnchor.constraint(equalToConstant: 40)
+            signUpButton.topAnchor.constraint(
+                equalTo: confirmPasswordTextField.bottomAnchor, constant: 24),
+            signUpButton.leadingAnchor.constraint(
+                equalTo: wrapperView.leadingAnchor),
+            signUpButton.trailingAnchor.constraint(
+                equalTo: wrapperView.trailingAnchor),
+            signUpButton.heightAnchor.constraint(equalToConstant: 40),
+            signUpButton.bottomAnchor.constraint(
+                equalTo: wrapperView.bottomAnchor, constant: -20),
         ])
     }
 

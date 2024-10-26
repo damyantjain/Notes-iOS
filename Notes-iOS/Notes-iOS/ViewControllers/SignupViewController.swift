@@ -49,6 +49,7 @@ class SignupViewController: UIViewController {
             if !response.success {
                 Utilities.showErrorAlert(
                     "Error", "Failed to register. Try Again", self)
+                return
             }
             if response.data?.auth == true, let token = response.data?.token {
                 defaults.set(token, forKey: "accessToken")
@@ -94,7 +95,7 @@ class SignupViewController: UIViewController {
                     "Validation error", "Please enter a valid email", self)
                 return (false, credentials)
             }
-            credentials.email = email
+            credentials.email = email.lowercased()
         }
         if let password = signUpView.passwordTextField.text {
             if password.isEmpty {
