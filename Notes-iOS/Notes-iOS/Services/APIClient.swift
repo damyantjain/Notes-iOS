@@ -75,8 +75,20 @@ public class APIClient {
                     } catch {
                         print("JSON Decoding Failed")
                     }
+                case 401:
+                    do {
+                        let decodedData = try JSONDecoder().decode(
+                            T.self, from: data)
+                        apiResponse = APIResponse(
+                            success: true, data: decodedData, message: "401 Unauthorized"
+                        )
+                    } catch {
+                        apiResponse.message = String(data: data, encoding: .utf8) ?? "Something went wrong"
+                    }
+                    break
                 case 400...499:
-                    apiResponse.message = "Client Error: \(statusCode)"
+                    apiResponse.message = String(data: data, encoding: .utf8) ?? "Something went wrong"
+                    break
                 default:
                     apiResponse.message = "Server Error: \(statusCode)"
                 }

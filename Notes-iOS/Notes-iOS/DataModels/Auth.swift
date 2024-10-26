@@ -7,6 +7,6 @@
 
 struct Auth: Codable {
     
-    let token: String
+    let token: String?
     let auth: Bool
 }

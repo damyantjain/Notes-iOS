@@ -31,7 +31,7 @@ class NotesTableViewCell: UITableViewCell {
     func setUpNotesLabel() {
         notesLabel = UILabel()
         notesLabel.translatesAutoresizingMaskIntoConstraints = false
-        notesLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        notesLabel.font = UIFont(name: "AvenirNext-Medium", size: 16)
         wrapperCellView.addSubview(notesLabel)
     }
 

@@ -51,7 +51,8 @@ class LoginViewController: UIViewController {
         let response = await authService.login(credentials: credentials)
         if !response.success {
             Utilities.showErrorAlert(
-                "Oops!", "Login failed", self)
+                "Login failed", response.message ?? "Something went wrong",
+                self)
             return
         }
         if response.data?.auth == true,
@@ -63,7 +64,7 @@ class LoginViewController: UIViewController {
                 [landingVC], animated: true)
         } else {
             Utilities.showErrorAlert(
-                "Oops!", "Login failed", self)
+                "Login failed", "Password is incorrect", self)
         }
     }
 
