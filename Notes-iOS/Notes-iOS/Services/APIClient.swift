@@ -90,7 +90,7 @@ public class APIClient {
                     apiResponse.message = String(data: data, encoding: .utf8) ?? "Something went wrong"
                     break
                 default:
-                    apiResponse.message = "Server Error: \(statusCode)"
+                    apiResponse.message = String(data: data, encoding: .utf8) ?? "Server Error: \(statusCode)"
                 }
             }
         case .failure:
