@@ -48,24 +48,22 @@ class LoginViewController: UIViewController {
     }
 
     private func login(credentials: Credentials) async {
-        do {
-            let response = try await authService.login(credentials: credentials)
-            if !response.success {
-                Utilities.showErrorAlert(
-                    "Oops!", "Login failed", self)
-                return
-            }
-            if response.data?.auth == true, let valueToBeSaved = response.data?.token{
-                defaults.set(valueToBeSaved, forKey: "accessToken")
-                let landingVC = LandingViewController()
-                navigationController?.setViewControllers(
-                    [landingVC], animated: true)
-            } else {
-                Utilities.showErrorAlert(
-                    "Oops!", "Login failed", self)
-            }
-        } catch {
-
+        let response = await authService.login(credentials: credentials)
+        if !response.success {
+            Utilities.showErrorAlert(
+                "Oops!", "Login failed", self)
+            return
+        }
+        if response.data?.auth == true,
+            let valueToBeSaved = response.data?.token
+        {
+            defaults.set(valueToBeSaved, forKey: "accessToken")
+            let landingVC = LandingViewController()
+            navigationController?.setViewControllers(
+                [landingVC], animated: true)
+        } else {
+            Utilities.showErrorAlert(
+                "Oops!", "Login failed", self)
         }
     }
 

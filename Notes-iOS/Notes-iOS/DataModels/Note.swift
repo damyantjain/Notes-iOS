@@ -5,8 +5,8 @@
 //  Created by Damyant Jain on 10/26/24.
 //
 
-struct Notes: Codable {
+struct Note: Codable {
     let _id: String
-    let userid: String
+    let userId: String
     let text: String
 }

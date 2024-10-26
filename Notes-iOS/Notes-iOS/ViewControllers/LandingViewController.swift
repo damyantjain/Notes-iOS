@@ -10,7 +10,9 @@ import UIKit
 class LandingViewController: UIViewController {
 
     let landingView = LandingView()
-    var notesList = [Notes]()
+    let notesService = NotesService()
+
+    var notesList = [Note]()
     override func loadView() {
         view = landingView
     }
@@ -24,17 +26,27 @@ class LandingViewController: UIViewController {
         landingView.notesTableView.delegate = self
         landingView.notesTableView.dataSource = self
         landingView.notesTableView.separatorStyle = .none
-        
-        notesList.append(Notes(_id: "3426236256", userid: "damyantjain", text: "This is my first note"))
-        notesList.append(Notes(_id: "723645234", userid: "damyant", text: "This is my second note"))
+
+        Task { await getAllNotes() }
     }
-    
+
     @objc func onAddBarButtonTapped() {
-        
+
     }
-    
-    func deleteSelectedFor(noteIndex: Int){
-        
+
+    func getAllNotes() async {
+        let response = await notesService.getAllNotes()
+        if !response.success {
+            return
+        }
+        if let allNotes = response.data?.notes {
+            notesList = allNotes
+            self.landingView.notesTableView.reloadData()
+        }
+    }
+
+    func deleteSelectedFor(noteIndex: Int) {
+
     }
 
 }
