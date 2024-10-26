@@ -51,7 +51,7 @@ class NotesTableViewCell: UITableViewCell {
             notesLabel.topAnchor.constraint(
                 lessThanOrEqualTo: wrapperCellView.topAnchor, constant: 6),
             notesLabel.leadingAnchor.constraint(
-                equalTo: wrapperCellView.leadingAnchor, constant: 8),
+                equalTo: wrapperCellView.leadingAnchor, constant: 12),
             notesLabel.heightAnchor.constraint(equalToConstant: 20),
 
             wrapperCellView.heightAnchor.constraint(equalToConstant: 30),
