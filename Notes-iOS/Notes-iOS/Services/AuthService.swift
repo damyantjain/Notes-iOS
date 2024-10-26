@@ -5,9 +5,9 @@
 //  Created by Damyant Jain on 10/24/24.
 //
 
-class AuthService: AuthAPIProtocol {
+class AuthService: AuthServiceProtocol {
 
-    func login(credentials: Credentials) async throws -> APIResponse<Auth> {
+    func login(credentials: Credentials) async -> APIResponse<Auth> {
         let parameters = [
             "email": credentials.email,
             "password": credentials.password,
@@ -17,7 +17,7 @@ class AuthService: AuthAPIProtocol {
         return response
     }
 
-    func register(credentials: Credentials) async throws -> APIResponse<Auth> {
+    func register(credentials: Credentials) async -> APIResponse<Auth> {
         let parameters = [
             "name": credentials.name,
             "email": credentials.email,

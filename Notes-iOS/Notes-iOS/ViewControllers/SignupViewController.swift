@@ -8,7 +8,7 @@
 import UIKit
 
 class SignupViewController: UIViewController {
-    
+
     let defaults = UserDefaults.standard
     let signUpView = SignupView()
     let authService = AuthService()
@@ -43,23 +43,19 @@ class SignupViewController: UIViewController {
     }
 
     private func signup(credentials: Credentials) async {
-        do {
-            let response = try await authService.register(
-                credentials: credentials)
-            if !response.success {
-                Utilities.showErrorAlert(
-                    "Error", "Failed to register. Try Again", self)
-                return
-            }
-            if response.data?.auth == true, let token = response.data?.token {
-                defaults.set(token, forKey: "accessToken")
-                registerdSuccessfully()
-            } else {
-                Utilities.showErrorAlert(
-                    "Error", "Failed to register. Try Again", self)
-            }
-        } catch {
-
+        let response = await authService.register(
+            credentials: credentials)
+        if !response.success {
+            Utilities.showErrorAlert(
+                "Error", "Failed to register. Try Again", self)
+            return
+        }
+        if response.data?.auth == true, let token = response.data?.token {
+            defaults.set(token, forKey: "accessToken")
+            registerdSuccessfully()
+        } else {
+            Utilities.showErrorAlert(
+                "Error", "Failed to register. Try Again", self)
         }
     }
 

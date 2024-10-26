@@ -15,7 +15,7 @@ public class APIClient {
     private init(baseURL: String) {
         self.baseURL = baseURL
     }
-    
+
     private func getHeaders() -> HTTPHeaders? {
         if let token = UserDefaults.standard.string(forKey: "accessToken") {
             return ["x-access-token": token]
@@ -73,7 +73,7 @@ public class APIClient {
                             success: true, data: decodedData, message: "Success"
                         )
                     } catch {
-                        print("JSON couldn't be decoded.")
+                        print("JSON Decoding Failed")
                     }
                 case 400...499:
                     apiResponse.message = "Client Error: \(statusCode)"
