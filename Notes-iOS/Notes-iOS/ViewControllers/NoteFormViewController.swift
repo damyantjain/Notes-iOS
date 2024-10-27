@@ -8,9 +8,9 @@
 import UIKit
 
 class NoteFormViewController: UIViewController {
-    
+
     let noteFormView = NoteFormView()
-    
+
     override func loadView() {
         view = noteFormView
     }
@@ -18,6 +18,13 @@ class NoteFormViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Add Note"
-    }
 
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .save, target: self,
+            action: #selector(onSaveButtonTapped))
+    }
+    
+    @objc func onSaveButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
 }
