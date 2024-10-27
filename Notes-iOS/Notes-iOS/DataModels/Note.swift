@@ -6,7 +6,7 @@
 //
 
 struct Note: Codable {
-    let _id: String
-    let userId: String
-    let text: String
+    var _id: String
+    var userId: String
+    var text: String
 }

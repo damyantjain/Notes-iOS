@@ -46,14 +46,14 @@ class SignupViewController: UIViewController {
         let response = await authService.register(
             credentials: credentials)
         if !response.success {
-            Utilities.showErrorAlert(
+            Utilities.showAlert(
                 "Error", response.message ?? "Failed to register. Try Again", self)
             return
         }
         if response.data?.auth == true, response.data?.token?.isEmpty == false {
             registerdSuccessfully()
         } else {
-            Utilities.showErrorAlert(
+            Utilities.showAlert(
                 "Error", "Failed to register. Try Again", self)
         }
     }
@@ -78,7 +78,7 @@ class SignupViewController: UIViewController {
         var credentials = Credentials(email: "", password: "", name: "")
         if let name = signUpView.nameTextField.text {
             if name.isEmpty {
-                Utilities.showErrorAlert(
+                Utilities.showAlert(
                     "Validation error", "Name cannot be empty", self)
                 return (false, credentials)
             }
@@ -86,7 +86,7 @@ class SignupViewController: UIViewController {
         }
         if let email = signUpView.emailTextField.text {
             if email.isEmpty || !Utilities.isValidEmail(email) {
-                Utilities.showErrorAlert(
+                Utilities.showAlert(
                     "Validation error", "Please enter a valid email", self)
                 return (false, credentials)
             }
@@ -94,7 +94,7 @@ class SignupViewController: UIViewController {
         }
         if let password = signUpView.passwordTextField.text {
             if password.isEmpty {
-                Utilities.showErrorAlert(
+                Utilities.showAlert(
                     "Validation error", "Password cannot be empty", self)
                 return (false, credentials)
             }
@@ -102,13 +102,13 @@ class SignupViewController: UIViewController {
         }
         if let confirmPassword = signUpView.confirmPasswordTextField.text {
             if confirmPassword.isEmpty {
-                Utilities.showErrorAlert(
+                Utilities.showAlert(
                     "Validation error", "Confirm password cannot be empty", self
                 )
                 return (false, credentials)
             }
             if credentials.password != confirmPassword {
-                Utilities.showErrorAlert(
+                Utilities.showAlert(
                     "Validation error", "Passwords do not match", self)
                 return (false, credentials)
             }

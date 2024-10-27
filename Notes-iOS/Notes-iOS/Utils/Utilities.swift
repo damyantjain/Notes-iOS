@@ -17,7 +17,7 @@ public class Utilities {
         return emailPred.evaluate(with: email)
     }
     
-    static func showErrorAlert(_ title: String,_ message: String, _ viewController: UIViewController) {
+    static func showAlert(_ title: String,_ message: String, _ viewController: UIViewController) {
         let alert = UIAlertController(
             title: title, message: "\(message)",
             preferredStyle: .alert

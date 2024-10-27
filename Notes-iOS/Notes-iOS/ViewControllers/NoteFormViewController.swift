@@ -10,6 +10,7 @@ import UIKit
 class NoteFormViewController: UIViewController {
 
     let noteFormView = NoteFormView()
+    let noteService = NotesService()
 
     override func loadView() {
         view = noteFormView
@@ -23,8 +24,20 @@ class NoteFormViewController: UIViewController {
             barButtonSystemItem: .save, target: self,
             action: #selector(onSaveButtonTapped))
     }
-    
+
     @objc func onSaveButtonTapped() {
-        navigationController?.popViewController(animated: true)
+        Task { await postNote() }
+    }
+
+    func postNote() async {
+        if let note = noteFormView.noteTextView.text, !note.isEmpty {
+            let response = await noteService.addNote(note: note)
+            if response.success, response.data?.posted == true {
+                //send notification to landing view
+                navigationController?.popViewController(animated: true)
+            } else {
+                Utilities.showAlert("Oops!", "Something went wrong", self)
+            }
+        }
     }
 }
