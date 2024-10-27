@@ -12,8 +12,8 @@ class NotesService: NotesServiceProtocol {
         return response
     }
 
-    func addNote(note: Note) async -> APIResponse<PostedNote> {
-        let parameters: [String: Any] = ["text": note.text]
+    func addNote(note: String) async -> APIResponse<PostedNote> {
+        let parameters: [String: Any] = ["text": note]
         let response: APIResponse<PostedNote> = await APIClient.instance.postAsync(
             path: APIConstants.addNote, parameters: parameters)
         return response

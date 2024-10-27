@@ -27,11 +27,21 @@ class LandingViewController: UIViewController {
         landingView.notesTableView.dataSource = self
         landingView.notesTableView.separatorStyle = .none
 
+        let tapGesture = UITapGestureRecognizer(
+            target: self, action: #selector(profileImageTapped))
+        landingView.profileImageContainer.addGestureRecognizer(tapGesture)
+
         Task { await getAllNotes() }
     }
 
     @objc func onAddBarButtonTapped() {
+        navigationController?.pushViewController(
+            NoteFormViewController(), animated: true)
+    }
 
+    @objc func profileImageTapped() {
+        navigationController?.pushViewController(
+            ProfileViewController(), animated: true)
     }
 
     func getAllNotes() async {
@@ -46,7 +56,24 @@ class LandingViewController: UIViewController {
     }
 
     func deleteSelectedFor(noteIndex: Int) {
+        let alert = UIAlertController(
+            title: "Delete",
+            message: "Are you sure you want to delete this note?",
+            preferredStyle: .alert
+        )
 
+        alert.addAction(
+            UIAlertAction(
+                title: "YES", style: .default,
+                handler: { _ in
+                    Task {
+                        //await self.deleteContact(at: contact)
+                    }
+                })
+        )
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+
+        self.present(alert, animated: true)
     }
 
 }

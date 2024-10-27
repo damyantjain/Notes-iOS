@@ -50,7 +50,7 @@ class LoginViewController: UIViewController {
     private func login(credentials: Credentials) async {
         let response = await authService.login(credentials: credentials)
         if !response.success {
-            Utilities.showErrorAlert(
+            Utilities.showAlert(
                 "Login failed", response.message ?? "Something went wrong",
                 self)
             return
@@ -63,7 +63,7 @@ class LoginViewController: UIViewController {
             navigationController?.setViewControllers(
                 [landingVC], animated: true)
         } else {
-            Utilities.showErrorAlert(
+            Utilities.showAlert(
                 "Login failed", "Password is incorrect", self)
         }
     }
@@ -72,7 +72,7 @@ class LoginViewController: UIViewController {
         var credentials = Credentials(email: "", password: "", name: "")
         if let email = loginView.emailTextField.text {
             if email.isEmpty || !Utilities.isValidEmail(email) {
-                Utilities.showErrorAlert(
+                Utilities.showAlert(
                     "Validation error", "Please enter a valid email", self)
                 return (false, credentials)
             }
@@ -80,7 +80,7 @@ class LoginViewController: UIViewController {
         }
         if let password = loginView.passwordTextField.text {
             if password.isEmpty {
-                Utilities.showErrorAlert(
+                Utilities.showAlert(
                     "Validation error", "Password cannot be empty", self)
                 return (false, credentials)
             }
