@@ -10,32 +10,41 @@ import UIKit
 class LandingView: UIView {
 
     var notesTableView: UITableView!
+    var profileImageContainer: UIView!
     var profileImage: UIImageView!
     var myNotesLabel: UILabel!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
+        setUpProfileImageContainer()
         setUpProfileImage()
         setUpNotesLabel()
         setUpNotesTableView()
         initConstraints()
     }
 
+    func setUpProfileImageContainer() {
+        profileImageContainer = UIView()
+        profileImageContainer.layer.cornerRadius = 20
+        profileImageContainer.layer.borderWidth = 1
+        profileImageContainer.layer.borderColor = UIColor.lightGray.cgColor
+        profileImageContainer.clipsToBounds = true
+        profileImageContainer.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(profileImageContainer)
+    }
+
     func setUpProfileImage() {
         profileImage = UIImageView()
         profileImage.image = UIImage(systemName: "person.fill")
         profileImage.contentMode = .scaleAspectFill
-        profileImage.clipsToBounds = true
-        profileImage.layer.cornerRadius = 20
         profileImage.tintColor = .gray
-        profileImage.layer.borderWidth = 1
-        profileImage.layer.borderColor = UIColor.lightGray.cgColor
+        profileImage.clipsToBounds = true
         profileImage.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(profileImage)
+        profileImageContainer.addSubview(profileImage)
     }
-    
-    func setUpNotesLabel(){
+
+    func setUpNotesLabel() {
         myNotesLabel = UILabel()
         myNotesLabel.text = "My Notes"
         myNotesLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 28)
@@ -53,21 +62,32 @@ class LandingView: UIView {
 
     func initConstraints() {
         NSLayoutConstraint.activate([
-            
+
+            profileImageContainer.leadingAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 8),
+            profileImageContainer.topAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 0),
+            profileImageContainer.widthAnchor.constraint(equalToConstant: 40),
+            profileImageContainer.heightAnchor.constraint(equalToConstant: 40),
+
             // Profile Image
             profileImage.leadingAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 8),
+                equalTo: profileImageContainer.leadingAnchor, constant: 0),
+            profileImage.trailingAnchor.constraint(
+                equalTo: profileImageContainer.trailingAnchor, constant: 0),
             profileImage.topAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 0),
-            profileImage.widthAnchor.constraint(equalToConstant: 40),
-            profileImage.heightAnchor.constraint(equalToConstant: 40),
-            
+                equalTo: profileImageContainer.topAnchor, constant: 0),
+            profileImage.bottomAnchor.constraint(
+                equalTo: profileImageContainer.bottomAnchor, constant: 0),
+
             //Notes Label
             myNotesLabel.topAnchor.constraint(
                 equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 0),
-            myNotesLabel.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
-            myNotesLabel.centerYAnchor.constraint(equalTo: profileImage.centerYAnchor),
-            
+            myNotesLabel.centerXAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            myNotesLabel.centerYAnchor.constraint(
+                equalTo: profileImage.centerYAnchor),
+
             //Notes Table View
             notesTableView.topAnchor.constraint(
                 equalTo: profileImage.bottomAnchor, constant: 16),

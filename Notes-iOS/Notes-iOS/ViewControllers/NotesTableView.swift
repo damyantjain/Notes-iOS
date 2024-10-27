@@ -28,7 +28,7 @@ extension LandingViewController: UITableViewDelegate, UITableViewDataSource {
 
             let buttonOptions = UIButton(type: .system)
             buttonOptions.sizeToFit()
-            buttonOptions.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
+            buttonOptions.frame = CGRect(x: 0, y: 0, width: 20, height: 35)
             buttonOptions.setImage(
                 UIImage(systemName: "trash"), for: .normal)
             buttonOptions.addAction(
