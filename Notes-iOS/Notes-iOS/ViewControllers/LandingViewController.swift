@@ -26,12 +26,19 @@ class LandingViewController: UIViewController {
         landingView.notesTableView.delegate = self
         landingView.notesTableView.dataSource = self
         landingView.notesTableView.separatorStyle = .none
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
+        landingView.profileImageContainer.addGestureRecognizer(tapGesture)
 
         Task { await getAllNotes() }
     }
 
     @objc func onAddBarButtonTapped() {
 
+    }
+    
+    @objc func profileImageTapped() {
+        navigationController?.pushViewController(ProfileViewController(), animated: true)
     }
 
     func getAllNotes() async {
