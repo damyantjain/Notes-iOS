@@ -8,8 +8,9 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-    
+
     let profileView = ProfileView()
+    let authService = AuthService()
 
     override func loadView() {
         view = profileView
@@ -17,8 +18,22 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        Task { await loadProfile() }
+    }
 
-        // Do any additional setup after loading the view.
+    func loadProfile() async {
+        let response = await authService.myDetails()
+        if !response.success {
+            return
+        }
+        if let user = response.data {
+            if let name = user.name {
+                profileView.nameValueLabel.text = "Name: \(name)"
+            }
+            if let email = user.email {
+                profileView.emailValueLabel.text = "Email: \(email)"
+            }
+        }
     }
 
 }

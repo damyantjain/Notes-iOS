@@ -35,11 +35,21 @@ class LandingViewController: UIViewController {
         landingView.notesTableView.dataSource = self
         landingView.notesTableView.separatorStyle = .none
 
-        let tapGesture = UITapGestureRecognizer(
-            target: self, action: #selector(profileImageTapped))
-        landingView.profileImageContainer.addGestureRecognizer(tapGesture)
-
+        landingView.profileImage.menu = getProfileImageMenu()
         Task { await getAllNotes() }
+    }
+
+    func getProfileImageMenu() -> UIMenu {
+        let menuItems = [
+            UIAction(
+                title: "Profile",
+                handler: { (_) in self.profileImageTapped() }),
+            UIAction(
+                title: "Logout",
+                handler: { (_) in self.logout() }),
+        ]
+
+        return UIMenu(title: "", children: menuItems)
     }
 
     @objc func onAddBarButtonTapped() {
@@ -50,6 +60,13 @@ class LandingViewController: UIViewController {
     @objc func profileImageTapped() {
         navigationController?.pushViewController(
             ProfileViewController(), animated: true)
+    }
+
+    func logout() {
+        UserDefaults.standard.removeObject(forKey: "accessToken")
+        let loginViewController = LoginViewController()
+        navigationController?.setViewControllers(
+            [loginViewController], animated: true)
     }
 
     @objc func getAllNotesTask() {
