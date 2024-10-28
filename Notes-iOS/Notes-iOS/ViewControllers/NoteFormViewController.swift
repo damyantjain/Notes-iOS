@@ -19,10 +19,19 @@ class NoteFormViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Add Note"
+        
+        let tapRecognizer = UITapGestureRecognizer(
+            target: self, action: #selector(hideKeyboardOnTap))
+        tapRecognizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapRecognizer)
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .save, target: self,
             action: #selector(onSaveButtonTapped))
+    }
+    
+    @objc func hideKeyboardOnTap() {
+        view.endEditing(true)
     }
 
     @objc func onSaveButtonTapped() {

@@ -9,4 +9,5 @@ protocol NotesServiceProtocol {
     
     func getAllNotes() async -> APIResponse<NoteResponse>
     func addNote(note : String) async -> APIResponse<PostedNote>
+    func deleteNote(noteId : String) async -> APIResponse<DeleteNote>
 }

@@ -54,6 +54,14 @@ class LandingViewController: UIViewController {
             self.landingView.notesTableView.reloadData()
         }
     }
+    
+    func deleteNote(at index: Int) async{
+        let response = await notesService.deleteNote(noteId: notesList[index]._id)
+        if !response.success {
+            return
+        }
+        await getAllNotes()
+    }
 
     func deleteSelectedFor(noteIndex: Int) {
         let alert = UIAlertController(
@@ -68,6 +76,7 @@ class LandingViewController: UIViewController {
                 handler: { _ in
                     Task {
                         //await self.deleteContact(at: contact)
+                        await self.deleteNote(at: noteIndex)
                     }
                 })
         )
