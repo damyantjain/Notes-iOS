@@ -51,7 +51,12 @@ class SignupViewController: UIViewController {
             return
         }
         if response.data?.auth == true, response.data?.token?.isEmpty == false {
-            registerdSuccessfully()
+            let valueToBeSaved = response.data?.token
+            defaults.set(valueToBeSaved, forKey: "accessToken")
+            let landingVC = LandingViewController()
+            navigationController?.setViewControllers(
+                [landingVC], animated: true)
+            //registerdSuccessfully()
         } else {
             Utilities.showAlert(
                 "Error", "Failed to register. Try Again", self)
