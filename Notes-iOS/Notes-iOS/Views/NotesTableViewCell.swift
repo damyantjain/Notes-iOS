@@ -31,6 +31,8 @@ class NotesTableViewCell: UITableViewCell {
     func setUpNotesLabel() {
         notesLabel = UILabel()
         notesLabel.translatesAutoresizingMaskIntoConstraints = false
+        notesLabel.numberOfLines = 1
+        notesLabel.lineBreakMode = .byTruncatingTail
         notesLabel.font = UIFont(name: "AvenirNext-Medium", size: 16)
         wrapperCellView.addSubview(notesLabel)
     }
@@ -52,6 +54,8 @@ class NotesTableViewCell: UITableViewCell {
                 lessThanOrEqualTo: wrapperCellView.topAnchor, constant: 6),
             notesLabel.leadingAnchor.constraint(
                 equalTo: wrapperCellView.leadingAnchor, constant: 12),
+            notesLabel.trailingAnchor.constraint(
+                equalTo: wrapperCellView.trailingAnchor, constant: -38),
             notesLabel.heightAnchor.constraint(equalToConstant: 20),
 
             wrapperCellView.heightAnchor.constraint(equalToConstant: 30),

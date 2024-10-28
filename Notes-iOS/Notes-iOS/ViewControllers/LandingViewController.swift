@@ -11,6 +11,7 @@ class LandingViewController: UIViewController {
 
     let landingView = LandingView()
     let notesService = NotesService()
+    let notificationCenter = NotificationCenter.default
 
     var notesList = [Note]()
     override func loadView() {
@@ -23,6 +24,13 @@ class LandingViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add, target: self,
             action: #selector(onAddBarButtonTapped))
+
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(getAllNotesTask),
+            name: .notesDidChange,
+            object: nil)
+
         landingView.notesTableView.delegate = self
         landingView.notesTableView.dataSource = self
         landingView.notesTableView.separatorStyle = .none
@@ -44,6 +52,10 @@ class LandingViewController: UIViewController {
             ProfileViewController(), animated: true)
     }
 
+    @objc func getAllNotesTask() {
+        Task { await getAllNotes() }
+    }
+
     func getAllNotes() async {
         let response = await notesService.getAllNotes()
         if !response.success {
@@ -54,9 +66,10 @@ class LandingViewController: UIViewController {
             self.landingView.notesTableView.reloadData()
         }
     }
-    
-    func deleteNote(at index: Int) async{
-        let response = await notesService.deleteNote(noteId: notesList[index]._id)
+
+    func deleteNote(at index: Int) async {
+        let response = await notesService.deleteNote(
+            noteId: notesList[index]._id)
         if !response.success {
             return
         }
