@@ -9,35 +9,45 @@ import UIKit
 
 extension LandingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
-            -> Int
-        {
-            return notesList.count
-        }
+        -> Int
+    {
+        return notesList.count
+    }
 
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
-            -> UITableViewCell
-        {
-            let cell =
-                tableView.dequeueReusableCell(
-                    withIdentifier: "notes", for: indexPath)
-                as! NotesTableViewCell
-            
-            let note = notesList[indexPath.row]
-            cell.selectionStyle = .none
-            cell.notesLabel?.text = note.text
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
+        -> UITableViewCell
+    {
+        let cell =
+            tableView.dequeueReusableCell(
+                withIdentifier: "notes", for: indexPath)
+            as! NotesTableViewCell
 
-            let buttonOptions = UIButton(type: .system)
-            buttonOptions.sizeToFit()
-            buttonOptions.frame = CGRect(x: 0, y: 0, width: 20, height: 35)
-            buttonOptions.setImage(
-                UIImage(systemName: "trash"), for: .normal)
-            buttonOptions.addAction(
-                UIAction(
-                    title: "Delete",
-                    handler: { (_) in
-                        self.deleteSelectedFor(noteIndex: indexPath.row)
-                    }), for: .touchUpInside)
-            cell.accessoryView = buttonOptions
-            return cell
-        }
+        let note = notesList[indexPath.row]
+        cell.selectionStyle = .none
+        cell.notesLabel?.text = note.text
+
+        let buttonOptions = UIButton(type: .system)
+        buttonOptions.sizeToFit()
+        buttonOptions.frame = CGRect(x: 0, y: 0, width: 20, height: 35)
+        buttonOptions.setImage(
+            UIImage(systemName: "trash"), for: .normal)
+        buttonOptions.addAction(
+            UIAction(
+                title: "Delete",
+                handler: { (_) in
+                    self.deleteSelectedFor(noteIndex: indexPath.row)
+                }), for: .touchUpInside)
+        cell.accessoryView = buttonOptions
+        return cell
+    }
+
+    func tableView(
+        _ tableView: UITableView, didSelectRowAt indexPath: IndexPath
+    ) {
+        let note = notesList[indexPath.row]
+        let noteDisplayController = NoteDisplayViewController()
+        noteDisplayController.note = note
+        navigationController?.pushViewController(
+            noteDisplayController, animated: true)
+    }
 }
