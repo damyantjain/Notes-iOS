@@ -20,9 +20,18 @@ class NoteFormViewController: UIViewController {
         super.viewDidLoad()
         title = "Add Note"
 
+        let tapRecognizer = UITapGestureRecognizer(
+            target: self, action: #selector(hideKeyboardOnTap))
+        tapRecognizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapRecognizer)
+
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .save, target: self,
             action: #selector(onSaveButtonTapped))
+    }
+
+    @objc func hideKeyboardOnTap() {
+        view.endEditing(true)
     }
 
     @objc func onSaveButtonTapped() {
@@ -33,7 +42,8 @@ class NoteFormViewController: UIViewController {
         if let note = noteFormView.noteTextView.text, !note.isEmpty {
             let response = await noteService.addNote(note: note)
             if response.success, response.data?.posted == true {
-                //send notification to landing view
+                NotificationCenter.default.post(
+                    name: .notesDidChange, object: nil)
                 navigationController?.popViewController(animated: true)
             } else {
                 Utilities.showAlert("Oops!", "Something went wrong", self)

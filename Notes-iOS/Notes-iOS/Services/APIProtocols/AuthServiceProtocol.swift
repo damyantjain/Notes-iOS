@@ -9,5 +9,5 @@ protocol AuthServiceProtocol {
 
     func login(credentials: Credentials) async -> APIResponse<Auth>
     func register(credentials: Credentials) async -> APIResponse<Auth>
-    
+    func myDetails() async -> APIResponse<User>
 }

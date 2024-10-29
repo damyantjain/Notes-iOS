@@ -27,4 +27,9 @@ class AuthService: AuthServiceProtocol {
             path: APIConstants.register, parameters: parameters)
         return response
     }
+    
+    func myDetails() async -> APIResponse<User> {
+        let response: APIResponse<User> = await APIClient.instance.getAsync(path: APIConstants.details)
+        return response
+    }
 }

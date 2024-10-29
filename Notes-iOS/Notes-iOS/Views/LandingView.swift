@@ -11,7 +11,7 @@ class LandingView: UIView {
 
     var notesTableView: UITableView!
     var profileImageContainer: UIView!
-    var profileImage: UIImageView!
+    var profileImage: UIButton!
     var myNotesLabel: UILabel!
 
     override init(frame: CGRect) {
@@ -35,10 +35,13 @@ class LandingView: UIView {
     }
 
     func setUpProfileImage() {
-        profileImage = UIImageView()
-        profileImage.image = UIImage(systemName: "person.fill")
-        profileImage.contentMode = .scaleAspectFill
+        profileImage = UIButton()
+        profileImage.setImage(UIImage(systemName: "person.fill"), for: .normal)
+        profileImage.imageView?.contentMode = .scaleAspectFill
+        profileImage.contentHorizontalAlignment = .fill
+        profileImage.contentVerticalAlignment = .fill
         profileImage.tintColor = .gray
+        profileImage.showsMenuAsPrimaryAction = true
         profileImage.clipsToBounds = true
         profileImage.translatesAutoresizingMaskIntoConstraints = false
         profileImageContainer.addSubview(profileImage)
