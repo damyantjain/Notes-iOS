@@ -21,9 +21,21 @@ class LandingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
+        
+        title = "My Notes"
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add, target: self,
             action: #selector(onAddBarButtonTapped))
+
+        let profileImage = UIImage(systemName: "person.crop.circle")
+        let profileBarButtonItem = UIBarButtonItem(
+            image: profileImage,
+            style: .plain,
+            target: self,
+            action: nil
+        )
+        profileBarButtonItem.menu = getProfileImageMenu()
+        navigationItem.leftBarButtonItem = profileBarButtonItem
 
         notificationCenter.addObserver(
             self,
@@ -35,7 +47,6 @@ class LandingViewController: UIViewController {
         landingView.notesTableView.dataSource = self
         landingView.notesTableView.separatorStyle = .none
 
-        landingView.profileImage.menu = getProfileImageMenu()
         Task { await getAllNotes() }
     }
 
@@ -43,7 +54,7 @@ class LandingViewController: UIViewController {
         let menuItems = [
             UIAction(
                 title: "Profile",
-                handler: { (_) in self.profileImageTapped() }),
+                handler: { (_) in self.navigateToProfile() }),
             UIAction(
                 title: "Logout",
                 handler: { (_) in self.logout() }),
@@ -57,7 +68,7 @@ class LandingViewController: UIViewController {
             NoteFormViewController(), animated: true)
     }
 
-    @objc func profileImageTapped() {
+    @objc func navigateToProfile() {
         navigationController?.pushViewController(
             ProfileViewController(), animated: true)
     }
