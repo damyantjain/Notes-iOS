@@ -32,7 +32,7 @@ class NoteFormView: UIView {
         noteTextView.font = UIFont.systemFont(ofSize: 16)
         noteTextView.textAlignment = .left
         noteTextView.isScrollEnabled = true
-        noteTextView.layer.borderColor = UIColor.black.cgColor
+        noteTextView.layer.borderColor = UIColor.gray.cgColor
         noteTextView.layer.borderWidth = 1
         noteTextView.layer.cornerRadius = 8
         noteTextView.textColor = UIColor.black
