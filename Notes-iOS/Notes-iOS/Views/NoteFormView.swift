@@ -10,36 +10,60 @@ import UIKit
 class NoteFormView: UIView {
 
     var noteTextView: UITextView!
+    var scrollView: UIScrollView!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
+        setUpScrollView()
         setUpNoteTextView()
         initConstraints()
     }
 
+    func setUpScrollView() {
+        scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(scrollView)
+    }
+
     func setUpNoteTextView() {
         noteTextView = UITextView()
-        noteTextView.layer.borderColor = UIColor.darkGray.cgColor
+        noteTextView.translatesAutoresizingMaskIntoConstraints = false
+        noteTextView.font = UIFont.systemFont(ofSize: 16)
+        noteTextView.textAlignment = .left
+        noteTextView.isScrollEnabled = true
+        noteTextView.layer.borderColor = UIColor.black.cgColor
         noteTextView.layer.borderWidth = 1
         noteTextView.layer.cornerRadius = 8
-        noteTextView.font = UIFont(name: "AvenirNext-Medium", size: 16)
-        noteTextView.clipsToBounds = true
-        noteTextView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(noteTextView)
+        noteTextView.textColor = UIColor.black
+        noteTextView.sizeToFit()
+        noteTextView.isScrollEnabled = false
+
+        scrollView.addSubview(noteTextView)
+
     }
 
     func initConstraints() {
         NSLayoutConstraint.activate([
-            
+
             //text editor
+            scrollView.topAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            scrollView.bottomAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+
             noteTextView.topAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
+                equalTo: scrollView.topAnchor, constant: 8),
             noteTextView.leadingAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+                equalTo: scrollView.leadingAnchor, constant: 20),
             noteTextView.trailingAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            noteTextView.heightAnchor.constraint(equalToConstant: 150),
+                equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            noteTextView.bottomAnchor.constraint(
+                equalTo: scrollView.bottomAnchor, constant: -8),
         ])
     }
 
