@@ -1,4 +1,4 @@
-# Notes Application
+# Notes iOS Application
 
 - Notes application to store multi-line notes
 - Created API Client for handling API calls using Alamofire
